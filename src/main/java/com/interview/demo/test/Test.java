@@ -7,6 +7,8 @@ public class Test {
 
 
     public static void main(String[] args) {
+        String aaa = new String("aaa");
+
         StringBuffer stringBuffer = new StringBuffer();
         StringBuilder stringBuilder = new StringBuilder();
         String s = new String();

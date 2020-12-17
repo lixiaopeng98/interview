@@ -1,22 +1,29 @@
 package com.interview.demo.thread.many;
 
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+
 import java.util.concurrent.*;
 
 public class ThreadManyRun {
 
     private static ThreadLocal threadLocal = new ThreadLocal();
 
-    public static void main(String[] args) {
 
-        threadLocal.set("aaa");
 
-        ThreadOne threadOne = new ThreadOne();
-        Thread thread = new Thread(threadOne);
-        thread.start();
 
-        ThreadTwo threadTwo = new ThreadTwo();
-        Thread threadTwoT = new Thread(threadTwo);
-        threadTwoT.start();
+        /**
+         * ThreadPoolExecutor
+         *
+         * 1、newSingleThreadExecutor
+         * 创建一个单线程化的线程池，它只会用唯一的工作线程来执行任务，保证所有任务按照指定顺序(FIFO, LIFO, 优先级)执行。
+         * 2、newFixedThreadPool
+         * 创建一个固定数量,无边界的线程池，可控制线程最大并发数，超出的线程会在队列中等待。
+         * 3、newScheduledThreadPool
+         * 创建一个可定期或者延时执行任务的定长线程池，支持定时及周期性任务执行。
+         * 4、newCachedThreadPoo
+         * 创建一个可缓存线程池，如果线程池长度超过处理需要，可灵活回收空闲线程，若无可回收，则新建线程
+         */
 
         /**
          * 创建一个线程池，该线程池重用在共享的无边界队列中操作的固定数量的线程。
@@ -25,7 +32,8 @@ public class ThreadManyRun {
          * 如果任何线程在关闭之前的执行过程中由于失败而终止，则在需要执行后续任务时，将替换一个新线程。
          * 池中的线程将一直存在，直到显式地{@link ExecutorService#shutdown shutdown}。
          */
-        Executors.newFixedThreadPool(1);
+        ExecutorService executorService = Executors.newFixedThreadPool(1);
+
         /**
          * 创建一个线程池，该线程池根据需要创建新线程，但在以前构建的线程可用时将重用这些线程。
          * 这些池通常会提高执行许多短期异步的程序的性能任务。
@@ -34,29 +42,30 @@ public class ThreadManyRun {
          * 因此，保持足够长时间空闲的池不会消耗任何资源。
          * 请注意，可以使用{@link ThreadPoolExecutor}构造函数创建具有类似属性但详细信息不同（例如超时参数）的池。
          */
-        Executors.newCachedThreadPool();
+//        Executors.newCachedThreadPool();
         /**
          * 创建一个线程池，该线程池可以安排命令在给定延迟后运行，或定期执行。
          */
-        Executors.newScheduledThreadPool(5);
+        private static ScheduledExecutorService scheduledExecutorService = Executors.newScheduledThreadPool(5);
+
         /**
          * 创建一个执行器，该执行器使用单个工作线程在无界队列中操作。
          * （但是请注意，如果这个单线程在关闭之前的执行过程中由于失败而终止，则在需要执行后续任务时，将替换一个新线程。）
          * 保证任务按顺序执行，并且在任何给定的时间内不会有多个任务处于活动状态。
          * 与其他等价的{@code newFixedThreadPool（1）}不同的是，返回的执行器保证不会被重新配置以使用其他线程。
          */
-        Executors.newSingleThreadExecutor();
+//        Executors.newSingleThreadExecutor();
         /**
          * 创建一个单线程执行器，该执行器可以安排命令在给定延迟后运行，或定期执行。
          * （但是请注意，如果这个单线程在关闭之前的执行过程中由于失败而终止，则在需要执行后续任务时，将替换一个新线程。）
          * 保证任务按顺序执行，并且在任何给定的时间内不会有多个任务处于活动状态。
          * 与其他等价的{@code newScheduledThreadPool（1）}不同的是，返回的执行器保证不会被重新配置以使用其他线程。
          */
-        Executors.newSingleThreadScheduledExecutor();
+//        Executors.newSingleThreadScheduledExecutor();
         /**
          * 使用所有{@link Runtime#availableProcessors available processors}作为其目标并行级别，创建一个窃取工作的线程池。
          */
-        Executors.newWorkStealingPool();
+//        Executors.newWorkStealingPool();
 
 
         /**
@@ -159,5 +168,46 @@ public class ThreadManyRun {
          * “工作窃取”模式中。
          */
         LinkedBlockingDeque<Object> linkedBlockingDeque = new LinkedBlockingDeque<>();
+
+    public static void main(String[] args) throws InterruptedException {
+
+        threadLocal.set("aaa");
+
+        ThreadOne threadOne = new ThreadOne();
+        Thread thread = new Thread(threadOne);
+        thread.start();
+
+        ThreadTwo threadTwo = new ThreadTwo();
+        Thread threadTwoT = new Thread(threadTwo);
+        threadTwoT.start();
+
+
+        testSchedule(scheduledExecutorService);
+
+
+        HttpHeaders httpHeaders = new HttpHeaders();
+        httpHeaders.setContentType(MediaType.APPLICATION_JSON);
     }
+
+    private static void testSchedule(ScheduledExecutorService scheduledExecutorService) throws InterruptedException {
+
+        long l = System.currentTimeMillis();
+
+        Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                long nanoTime = System.currentTimeMillis();
+                System.out.println("执行run方法" + (nanoTime - l));
+            }
+        });
+
+        scheduledExecutorService.schedule(thread, 1000L, TimeUnit.MILLISECONDS);
+        System.out.println("执行完毕");
+        while (Thread.activeCount() > 1){
+            Thread.yield();
+        }
+        scheduledExecutorService.shutdown();
+    }
+
+
 }

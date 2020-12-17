@@ -17,7 +17,6 @@ public class MybatisDoc {
      *      存数据结构，结构是map。mybatis 的二级缓存是通过CacheExecutor 实现的。CacheExecutor
      *      其实是Executor 的代理对象。所有的查询操作，在CacheExecutor 中都会先匹配缓存中是否存
      *      在，不存在则查询数据库。
-     *
      */
     public void a(){
 
