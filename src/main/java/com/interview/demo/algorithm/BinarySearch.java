@@ -34,9 +34,9 @@ public class BinarySearch{
      */
     public static void findNum(int findNum, int[] num, int low, int height) {
         int length = (low + height) / 2;
-        System.err.println(low + "==" + height + "==" + num[length] + ";length==" + length);
+        System.out.println(low + "==" + height + "==" + num[length] + ";length==" + length);
         if (findNum == num[length]) {
-            System.err.println("完成;下标为"+length+";下标取值为"+num[length]);
+            System.out.println("完成;下标为"+length+";下标取值为"+num[length]);
         } else if (findNum > num[length]) {
             findNum(findNum, num, length + 1, height);
         } else if (findNum < num[length]) {

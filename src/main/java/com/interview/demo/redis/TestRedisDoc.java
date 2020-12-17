@@ -2,7 +2,7 @@ package com.interview.demo.redis;
 
 import java.util.HashMap;
 
-public class TestRLock {
+public class TestRedisDoc {
 
     /**
      * 一. 缓存穿透：key对应的数据在数据源并不存在，每次针对此key的请求从缓存获取不到，请求都会到数据源，从而可能压垮数据源。

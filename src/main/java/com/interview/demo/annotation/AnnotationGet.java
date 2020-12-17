@@ -10,7 +10,7 @@ public @interface AnnotationGet {
 
     /**
      * Retention 保留(保留策略-运行)
-     * 被保留的时间长短
+     * 保留策略 存活策略
      * Target 目标
      * 修饰的对象范围
      * Documented 记录，记载(详情);用文件证明(或证实)
