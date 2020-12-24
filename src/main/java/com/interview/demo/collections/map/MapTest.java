@@ -1,7 +1,8 @@
-package com.interview.demo.collections;
+package com.interview.demo.collections.map;
 
 import java.util.HashMap;
 import java.util.Hashtable;
+import java.util.TreeMap;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.locks.ReentrantLock;
 
@@ -24,5 +25,21 @@ public class MapTest {
         // synchronized 建议不要使用
         Hashtable<String, Object> hashtable = new Hashtable<>();
         hashtable.put("aaa","aaa");
+    }
+
+    public static void testMapOne(){
+        TreeMap<String, Object> treeMap = new TreeMap<>();
+        treeMap.put("aab","kkk");
+        treeMap.put("aaa","kkk");
+        treeMap.put("ccc","kkk");
+        treeMap.put("bbb","kkk");
+        treeMap.keySet().stream().forEach(item -> {
+            System.out.println(item + "=" + treeMap.get(item));
+        });
+    }
+
+
+    public static void main(String[] args) {
+        testMapOne();
     }
 }

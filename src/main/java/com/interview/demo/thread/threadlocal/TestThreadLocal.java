@@ -54,5 +54,7 @@ public class TestThreadLocal {
 
         HashMap<String, Object> hashMap = new HashMap<>();
         hashMap.put("aa","");
+
+
     }
 }

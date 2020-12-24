@@ -1,4 +1,4 @@
-package com.interview.demo.collections;
+package com.interview.demo.collections.list;
 
 import java.util.ArrayList;
 import java.util.Collections;

@@ -1,8 +1,8 @@
-package com.interview.demo.collections;
+package com.interview.demo.collections.map;
 
 import java.util.HashMap;
 
-public class MapStudy {
+public class HashMapStudy {
 
     /**
      * HashMap (数组+链表+红黑树)
