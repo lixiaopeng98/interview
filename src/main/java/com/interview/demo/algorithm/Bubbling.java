@@ -1,5 +1,7 @@
 package com.interview.demo.algorithm;
 
+import java.util.Arrays;
+
 /**
  * 冒泡排序
  * （1）比较前后相邻的二个数据，如果前面数据大于后面的数据，就将这二个数据交换。
@@ -10,7 +12,13 @@ package com.interview.demo.algorithm;
  */
 public class Bubbling {
 
-    public static void bubbleSort1(int [] a, int n){
+    /**
+     * 冒泡排序
+     *
+     * @param a
+     * @param n
+     */
+    public static void bubbleSort(int [] a, int n){
         int i, j;
         //表示n 次排序过程。
         for(i=0; i<n; i++){
@@ -27,23 +35,10 @@ public class Bubbling {
         }
     }
 
-    /**
-     * 冒泡排序
-     *
-     * @param array
-     */
-    public static void bubblingSort(int[] array){
-
-        int i,j;
-
-        for (int k = 0; k < array.length; k++) {
-            for (int p = 0; p < array.length-k; p++) {
-                if ( array[k] > array[p]){
-
-                }
-            }
-        }
-
+    public static void main(String[] args) {
+        int[] ints = {2, 9, 10, 22, 44, 7, 8, 17, 28};
+        bubbleSort(ints, ints.length);
+        System.out.println(Arrays.toString(ints));
     }
 
 }

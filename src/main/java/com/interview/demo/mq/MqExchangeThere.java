@@ -22,4 +22,8 @@ public class MqExchangeThere {
      * exchange
      *
      */
+
+    /**
+     * 死信是啥东西
+     */
 }
