@@ -29,10 +29,18 @@
         2. mysql 的聚集索引 非聚集索引
         3. sql 的执行过程
         4. explain 各个字段描述
+        5. mysql 四个模型
+        Index Condition Pushdown(ICP) 下推优化 尤为重要
+        Multi-Range Read (MRR)
+        Batched Key Access (BKA) 
+        Block Nested-Loop(BNL)
 ### redis
         1. 锁
         2. 数据结构
         3. 集群原理
+        4. 事务
+        5. 数据结构-string、hash、set、zset、list等等
+        6. 底层数据结构 sds、字典dict、zskiplist、ziplist、
 ### thread
         1. 线程池
         2. ThreadLocal 和 volatile  

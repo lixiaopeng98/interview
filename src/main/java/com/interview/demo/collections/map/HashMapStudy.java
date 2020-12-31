@@ -51,6 +51,12 @@ public class HashMapStudy {
      *    tab[i] = newNode(hash, key, value, null);
      *
      */
+    /**
+     * HashMap 是如何解决 hash冲突的
+     * 1. 散列
+     * 2. 线性扩散法
+     *
+     */
     public void testHashMap(){
         HashMap<String, Object> hashMap = new HashMap<>();
         hashMap.put("aaa","");
