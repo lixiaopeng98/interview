@@ -19,6 +19,7 @@ public class CountDownLatchTest {
                 public void run() {
                     System.out.println("k=" + finalK + ";name=" + Thread.currentThread().getName());
                     countDownLatch.countDown();
+                    System.out.println(Thread.currentThread().getName() + "结束;");
                 }
             }).start();
         }
