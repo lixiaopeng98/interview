@@ -1,6 +1,8 @@
 package com.interview.demo.thread.twotheardprint;
 
-import java.util.concurrent.CompletableFuture;
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
+
 import java.util.concurrent.ExecutionException;
 
 /**
@@ -10,17 +12,36 @@ import java.util.concurrent.ExecutionException;
  */
 public class test {
 
-    public static void main(String[] args) throws ExecutionException, InterruptedException {
-        CompletableFuture<String> completableFuture = new CompletableFuture<String>();
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                completableFuture.complete("aaa");
-            }
-        }).start();
+    public static Object object = new Object();
 
-        String s = completableFuture.get();
-        System.out.println(s);
+    public static void main(String[] args) throws ExecutionException, InterruptedException {
+//        CompletableFuture<String> completableFuture = new CompletableFuture<String>();
+//        new Thread(new Runnable() {
+//            @Override
+//            public void run() {
+//                completableFuture.complete("aaa");
+//            }
+//        }).start();
+//
+//        String s = completableFuture.get();
+//        System.out.println(s);
+//        handleWait();
+
+
+        String s = new String("[{\"conditions\":\"{\\\"groupName\\\":\\\"android\\\",\\\"type\\\":0,\\\"value\\\":[]}\",\"filterCode\n" +
+                "\"ios\\\",\\\"type\\\":0,\\\"value\\\":[]}\",\"filterCode\":\"osVersion\",\"id\":829,\"opType\":\"OR\",\"order\":0},{\"conditions\":\"{\\\"groupName\\\":\\\"android\\\",\\\"gtValue\\\":999999,\\\"ltValue\\\":10000}\",\"filterCode\":\"appV\\\",\\\"gtValue\\\":999999,\\\"ltValue\\\":10000}\",\"filterCode\":\"appVersion\",\"id\":827,\"opType\":\"BTWN\",\"order\":0}]");
+        JSONArray objects = JSONObject.parseArray(s);
+        System.out.println(objects);
+    }
+
+
+    public static void handleWait() throws InterruptedException {
+        synchronized (object){
+            object.wait();
+        }
+
+
+
     }
 
 }
